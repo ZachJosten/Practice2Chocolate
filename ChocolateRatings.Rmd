@@ -1,16 +1,25 @@
 ---
 title: "ChocolateRatings"
-author: ""
+author: "Zach Lang"
 date: "2/16/2022"
 output: html_document
 ---
 
+1.What is the overall number of chocolate bars rated?
+2.How does the number of ratings depend on the year? Draw a bar chart of the number of reports.
+
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 ```{r}
+library(tidyverse)
 choco <- read.csv("https://ds202-at-isu.github.io/labs/data/choco.csv")
 head(choco)
+
+choco %>% ggplot(aes(x = as.factor(Review.Date))) +
+  geom_bar() +xlab('Year')+ylab('Number of Reviews')+ ggtitle('Number of Reviews by Year')
 ```
 
+From head(choco), we can see that there are 1852 ratings.
 
+From the bar plot, we can see that interest in reviewing chocolates peaked in 2015, and has tapered off since.
