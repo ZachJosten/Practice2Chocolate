@@ -1,0 +1,16 @@
+---
+title: "ChocolateRatings"
+author: ""
+date: "2/16/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+choco <- read.csv("https://ds202-at-isu.github.io/labs/data/choco.csv")
+head(choco)
+```
+
+
