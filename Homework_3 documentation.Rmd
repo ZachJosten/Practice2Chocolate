@@ -1,0 +1,82 @@
+---
+title: "Lab2"
+author: "Kevin Gnaster, Zach Josten, Cade Balvanz, Zach Lang"
+date: "2/16/2022"
+output: html_document
+---
+
+### Git Hub Repo Link
+
+https://github.com/ZachJosten/Practice2Chocolate
+
+```{r}
+library(classdata)
+library(ggplot2)
+choco <- read.csv("https://ds202-at-isu.github.io/labs/data/choco.csv")
+head(choco)
+```
+
+# Question set 1
+
+### 1
+```{r}
+dim(choco)[1]
+```
+
+### 2
+```{r}
+ggplot(choco, aes(x = as.factor(Review.Date))) + 
+  geom_bar() + 
+  ggtitle("Bar Plot of Ratings Per Year") + 
+  ylab("Amount of Ratings") +
+  xlab("Date")
+```
+
+# Question Set 2
+
+### 1
+
+```{r}
+ggplot(choco, aes(x = Rating)) + 
+  geom_histogram(bins = 10) + 
+  ggtitle("Histogram of Ratings") + 
+  ylab("Amount of Ratings") +
+  xlab("Rating")
+```
+
+There appears to be some outliers around 1 and 2. The majority of Ratings fall around 3 and 4.
+
+### 2
+
+```{r}
+ggplot(data = choco, aes(x = Rating, y = Cocoa.Pct)) +
+  geom_point()
+```
+
+Cocoa Percentage doesn't seem to effect Ratings significantly.
+
+### 3
+
+```{r}
+library(dplyr)
+```
+
+```{r}
+choco2 = filter(choco, Company.Location %in% c("U.S.A.", "France", "Canada"))
+ggplot(data = choco2, aes(x = Rating)) + 
+  geom_histogram(bins = 10) + 
+  facet_wrap(~Company.Location)
+```
+
+Ratings appear to be  higher in the US compared to France and Canada.
+```{r}
+cho = choco[choco$Broad.Bean.Origin %in% c("Ghana" , "Bolivia" , "Puerto Rico", "Hawaii", "Vietnam"),]
+
+ggplot(data = cho, aes(x = Rating)) + 
+  geom_histogram(bins=10)+
+  facet_wrap(~Broad.Bean.Origin)
+```
+The ratings for all of the different bean orgins are about the same except for Puerto Rico which has the lowest mean values and count of total ratings. 
+## Need to add question to investigate and paragraph to workflow
+
+  The first thing our group did was to create a repository that we could all work out of. Zach made the Repository and invited us all to the project. We all then forked off of the main branch and worked on our own separate questions. Kevin did the first two set of question. Zach came up with the answered the question. Cade wrote the paragraph, and then answered the question of if bean orgin affects the rating.
