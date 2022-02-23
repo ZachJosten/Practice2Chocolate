@@ -14,6 +14,7 @@ library(classdata)
 library(ggplot2)
 choco <- read.csv("https://ds202-at-isu.github.io/labs/data/choco.csv")
 head(choco)
+summary(choco)
 ```
 
 # Question set 1
@@ -70,5 +71,24 @@ ggplot(data = choco2, aes(x = Rating)) +
 ```
 
 Ratings appear to be  higher in the US compared to France and Canada.
+\
+\
+Question we investigated: \
+What are the average cocoa percentages of each country where there is chocolate produced?
+\
 
+```{r}
+
+company.unique = unique(choco$Company.Location)
+cocoa.mean = tapply(choco$Cocoa.Pct,choco$Company.Location, mean)
+levels.reorder = levels(reorder(company.unique, cocoa.mean, na.RM=TRUE))
+choco.company = company.unique
+choco.company.reorder = factor(choco.company, levels = levels.reorder)
+company.unique = choco.company.reorder
+company.means = data.frame(company.unique, cocoa.mean)
+comp.means = dplyr::filter(company.means, company.means$cocoa.mean >= 73)
+ggplot(comp.means, aes(x = company.unique, color=company.unique)) + geom_bar(aes(weight = cocoa.mean)) + coord_flip() + xlab("Company Location") + ylab("Cocoa Percent")
+```
+\
+This shows all the Company locations with an average cocoa percentage higher than 73. 73 was chosen as any lower and the graph becomes difficult to read. As we can see, chocolates produced in places like the Philippines, Ireland and Colombia contain a high amount of cocoa in them. 
 ## Need to add question to investigate and paragraph to workflow
