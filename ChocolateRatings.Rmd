@@ -91,4 +91,16 @@ ggplot(comp.means, aes(x = company.unique, color=company.unique)) + geom_bar(aes
 ```
 \
 This shows all the Company locations with an average cocoa percentage higher than 73. 73 was chosen as any lower and the graph becomes difficult to read. As we can see, chocolates produced in places like the Philippines, Ireland and Colombia contain a high amount of cocoa in them. 
+
+```{r}
+cho = choco[choco$Broad.Bean.Origin %in% c("Ghana" , "Bolivia" , "Puerto Rico", "Hawaii", "Vietnam"),]
+
+ggplot(data = cho, aes(x = Rating)) + 
+  geom_histogram(bins=10)+
+  facet_wrap(~Broad.Bean.Origin)
+```
+
+The ratings for all of the different bean orgins are about the same except for Puerto Rico which has the lowest mean values and count of total ratings. 
 ## Need to add question to investigate and paragraph to workflow
+
+The first thing our group did was to create a repository that we could all work out of. Zach made the Repository and invited us all to the project. We all then forked off of the main branch and worked on our own separate questions. Kevin did the first two set of question. Zach came up with the answered the question of what countries produce choclates with the highest amount of cocoa. Cade wrote the paragraph, and then answered the question of if bean orgin affects the rating.
